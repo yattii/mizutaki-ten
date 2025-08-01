@@ -1,103 +1,109 @@
-import Image from "next/image";
+// 'use client';
 
+// import { useState, useEffect } from 'react';
+
+// export default function Home() {
+//   const [menuOpen, setMenuOpen] = useState(false);
+
+//   useEffect(() => {
+//     document.documentElement.style.scrollBehavior = 'smooth';
+//   }, []);
+
+//   return (
+//     <main className="font-sans text-gray-800">
+//       {/* ナビゲーション */}
+// <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-20 px-6 py-4 flex justify-between items-center">
+//   <h1 className="text-center font-bold text-gray-900">水炊き 天</h1>
+
+//   {/* ハンバーガー（スマホ用） */}
+//   <button
+//     className="md:hidden text-3xl"
+//     onClick={() => setMenuOpen(!menuOpen)}
+//     aria-label="メニューを開閉"
+//   >
+//     {menuOpen ? '✕' : '☰'}
+//   </button>
+
+//   {/* PC用メニュー */}
+//   <div className="hidden md:flex gap-8 text-sm font-semibold text-gray-700">
+//     <a href="#top">水炊き天</a>
+//     <a href="#menu">メニュー</a>
+//     <a href="#kodawari">こだわり</a>
+//     <a href="#access">アクセス</a>
+//   </div>
+// </nav>
+
+// {/* スマホ用メニュー（開閉式） */}
+// {menuOpen && (
+//   <div className="md:hidden fixed top-16 left-0 w-full bg-white shadow z-10 flex flex-col items-center gap-4 py-4">
+//     <a href="#top" onClick={() => setMenuOpen(false)}>水炊き天</a>
+//     <a href="#menu" onClick={() => setMenuOpen(false)}>メニュー</a>
+//     <a href="#kodawari" onClick={() => setMenuOpen(false)}>こだわり</a>
+//     <a href="#access" onClick={() => setMenuOpen(false)}>アクセス</a>
+//   </div>
+// )}
+
+
+//       {/* トップ */}
+//       <section
+//         id="top"
+//         className="h-screen bg-cover bg-center flex items-center justify-center"
+//         style={{ backgroundImage: "url('/images/hero.jpg')" }}
+//       >
+//         <h1 className="text-4xl md:text-6xl text-white font-bold bg-black bg-opacity-60 px-8 py-4 rounded-xl shadow-lg">
+//           水炊き 天
+//         </h1>
+//       </section>
+
+//       {/* メニュー */}
+//       <section id="menu" className="scroll-mt-20 py-24 px-6 bg-white">
+//         <div className="max-w-screen-md mx-auto">
+//           <h2 className="text-3xl font-bold mb-6 border-b pb-2 border-gray-300">メニュー</h2>
+//           <ul className="space-y-2 text-lg">
+//             <li>・水炊きコース（3,500円）</li>
+//             <li>・鶏刺し盛り合わせ（1,200円）</li>
+//             <li>・〆の雑炊（+300円）</li>
+//           </ul>
+//         </div>
+//       </section>
+
+//       {/* こだわり */}
+//       <section id="kodawari" className="scroll-mt-20 py-24 px-6 bg-gray-50">
+//         <div className="max-w-screen-md mx-auto">
+//           <h2 className="text-3xl font-bold mb-6 border-b pb-2 border-gray-300">こだわり</h2>
+//           <p className="text-lg leading-relaxed">
+//             国産の朝引き鶏をじっくり炊き上げた白濁スープが自慢。
+//             無添加・無化調で、素材の旨味を最大限に引き出しています。
+//           </p>
+//         </div>
+//       </section>
+
+//       {/* アクセス */}
+//       <section id="access" className="scroll-mt-20 py-24 px-6 bg-white">
+//         <div className="max-w-screen-md mx-auto">
+//           <h2 className="text-3xl font-bold mb-6 border-b pb-2 border-gray-300">アクセス</h2>
+//           <p className="mb-4 text-lg">〒000-0000 大阪市〇〇区△△1-2-3</p>
+
+//           {/* GoogleマップはURLを本番用に変更する */}
+//           <div className="w-full h-64 bg-gray-200 flex items-center justify-center text-sm text-gray-500">
+//             Google Mapは後で挿入（APIキー付きURLが必要です）
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* フッター */}
+//       <footer className="bg-gray-800 text-white text-center py-8 text-sm">
+//         <p className="mb-1">水炊き 天 ｜ 住所：大阪市〇〇区△△1-2-3</p>
+//         <p>電話：06-xxxx-xxxx ｜ 営業時間：17:00〜23:00（火曜定休）</p>
+//       </footer>
+//     </main>
+//   );
+// }
+// app/page.tsx
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <main className="min-h-screen bg-white flex items-center justify-center">
+      <h1 className="text-4xl text-blue-500 font-bold">Tailwindが効いてます！</h1>
+    </main>
   );
 }

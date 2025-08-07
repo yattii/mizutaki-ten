@@ -205,7 +205,7 @@ export default function Home() {
           href="https://www.instagram.com/ten.mizutaki?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-gray-500/50 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded shadow text-sm"
+          className="bg-blue-500/50 hover:bg-blue-400 text-gray-800 px-4 py-2 rounded shadow text-sm"
         >
           Instagramを見る
         </a>
@@ -241,7 +241,7 @@ export default function Home() {
           href="https://www.tiktok.com/@10.mizutaki"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-gray-500/50 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded shadow text-sm"
+          className="bg-blue-500/50 hover:bg-blue-400 text-gray-800 px-4 py-2 rounded shadow text-sm"
         >
           TikTokを見る
         </a>
@@ -465,7 +465,7 @@ export default function Home() {
 </div>
 {/* 飲み放題メニュー */}
 
-<div className="bg-[#fdfaf3] border border-gray-300 rounded-md p-4 mt-4 text-base leading-tight ">
+<div className="bg-[#fdfaf3] border border-gray-300 rounded-md p-4 mt-4 text-sm md:text-base leading-tight">
   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
     {/* 左列 */}
     <div>
@@ -754,86 +754,80 @@ export default function Home() {
           </p>
         </div>
       </footer>
-      {/* 固定お問い合わせポップアップ */}
-      <AnimatePresence>
-        {showPopup && (
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed bottom-0 left-0 w-full z-50 bg-blue-900 text-white shadow-lg"
+
+<AnimatePresence>
+  {showPopup && (
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 100, opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed bottom-0 left-0 w-full z-50 bg-blue-900 text-white shadow-lg"
+    >
+      <div className="max-w-screen-lg mx-auto px-4 py-3 sm:px-8">
+        {/* 上部：テキスト＋SNSアイコン */}
+        <div className="flex justify-center items-center gap-2 mb-2">
+          <p className="text-sm sm:text-base whitespace-nowrap">
+            ＼ お気軽にお問い合わせください ／
+          </p>
+
+          {/* SNSアイコン（常に表示） */}
+          <div className="flex gap-2">
+            <a
+              href="https://www.instagram.com/your_account"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 flex items-center justify-center bg-pink-500 text-white rounded-full shadow hover:opacity-90 transition-all"
+            >
+              <FaInstagram className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="https://www.tiktok.com/@your_account"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 flex items-center justify-center bg-black text-white rounded-full shadow hover:opacity-90 transition-all"
+            >
+              <FaTiktok className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+        {/* 下部：電話＋お問い合わせ */}
+        <div className="flex justify-center items-center gap-2 flex-wrap">
+          {/* 電話 */}
+          <a
+            href="tel:07090944338"
+            className="flex items-center gap-2 bg-blue-300 text-blue-900 px-4 py-2 rounded-full shadow hover:opacity-90 transition-all"
           >
-            <div className="max-w-screen-lg mx-auto flex flex-wrap justify-between items-center px-4 py-3 sm:px-8 gap-3">
-              <p className="w-full text-center text-sm sm:text-base">
-                ＼ お気軽にお問い合わせください ／
-              </p>
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1.2 1.2 0 011.3-.3 12.5 12.5 0 003.9.6 1.2 1.2 0 011.2 1.2v3.8a1.2 1.2 0 01-1.2 1.2A18 18 0 013 6.6a1.2 1.2 0 011.2-1.2H8a1.2 1.2 0 011.2 1.2 12.5 12.5 0 00.6 3.9 1.2 1.2 0 01-.3 1.3L6.6 10.8z" />
+            </svg>
+            <span className="text-base">070-9094-4338</span>
+          </a>
 
-              <div className="flex justify-center items-center gap-1 w-full">
-                {/* 電話ボタン */}
-                <a
-                  href="tel:07090944338"
-                  className="flex items-center gap-2 bg-blue-300 text-blue-900 px-4 py-2 rounded-full shadow hover:opacity-90 transition-all"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1.2 1.2 0 011.3-.3 12.5 12.5 0 003.9.6 1.2 1.2 0 011.2 1.2v3.8a1.2 1.2 0 01-1.2 1.2A18 18 0 013 6.6a1.2 1.2 0 011.2-1.2H8a1.2 1.2 0 011.2 1.2 12.5 12.5 0 00.6 3.9 1.2 1.2 0 01-.3 1.3L6.6 10.8z" />
-                  </svg>
-                  <span className="text-base">070-9094-4338</span>
-                </a>
+          {/* メール */}
+          <a
+            href="mailto:example@gmail.com"
+            className="flex items-center gap-2 bg-lime-400 text-white px-4 py-2 rounded-full shadow hover:opacity-90 transition-all"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 4h16v16H4z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 4l8 8 8-8" />
+            </svg>
+            <span className="text-base">お問い合わせ</span>
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
-                {/* メールボタン */}
-                <a
-                  href="mailto:example@gmail.com"
-                  className="flex items-center gap-2 bg-lime-400 text-white px-4 py-2 rounded-full shadow hover:opacity-90 transition-all"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 4h16v16H4z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 4l8 8 8-8"
-                    />
-                  </svg>
-                  <span className="text-base">お問い合わせ</span>
-                </a>
-                {/* Instagramアイコンボタン */}
-<a
-  href="https://www.instagram.com/your_account" // ←あなたのアカウントに変更
-  target="_blank"
-  rel="noopener noreferrer"
-  className="w-6 h-6 flex items-center justify-center bg-pink-500 text-white rounded-full shadow hover:opacity-90 transition-all"
->
-  <FaInstagram className="w-4 h-4" />
-</a>
-
-{/* TikTokアイコンボタン */}
-<a
-  href="https://www.tiktok.com/@your_account" // ←あなたのアカウントに変更
-  target="_blank"
-  rel="noopener noreferrer"
-  className="w-6 h-6 flex items-center justify-center bg-black text-white rounded-full shadow hover:opacity-90 transition-all"
->
-  <FaTiktok className="w-4 h-4" />
-</a>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </main>
   );
 }

@@ -11,6 +11,9 @@ const kaiFont = Noto_Serif_JP({
 export const metadata: Metadata = {
   title: '水炊き天',
   description: '水炊き天の公式サイト',
+  icons: {
+    icon: '/favicon.ico', // public 配下のパス
+  },
 }
 
 export default function RootLayout({

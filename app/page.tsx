@@ -831,6 +831,7 @@ export default function Home() {
     </main>
   );
 }
-// git add .
-// git commit -m "Fix something"
-// git push
+// git status                    
+// git add .                       
+// git commit -m "Fix something"  
+// git push                        

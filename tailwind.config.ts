@@ -7,9 +7,15 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        kai: ['"Noto Serif JP"', 'serif'],
+      },
+    },
   },
+  
   plugins: [],
 }
+
 
 export default config

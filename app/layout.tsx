@@ -1,10 +1,17 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import { Noto_Serif_JP } from 'next/font/google'
+
+const kaiFont = Noto_Serif_JP({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: '水炊き天',
   description: '水炊き天の公式サイト',
-};
+}
 
 export default function RootLayout({
   children,
@@ -13,7 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      {/* TailwindのフォントクラスとGoogleフォントのクラスを両方適用 */}
+      <body className={`${kaiFont.className} font-kai text-gray-800`}>
+        {children}
+      </body>
     </html>
   )
 }

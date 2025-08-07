@@ -774,7 +774,7 @@ export default function Home() {
           {/* SNSアイコン（常に表示） */}
           <div className="flex gap-2">
             <a
-              href="https://www.instagram.com/your_account"
+              href="https://www.instagram.com/ten.mizutaki?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               target="_blank"
               rel="noopener noreferrer"
               className="w-6 h-6 flex items-center justify-center bg-pink-500 text-white rounded-full shadow hover:opacity-90 transition-all"
@@ -782,7 +782,7 @@ export default function Home() {
               <FaInstagram className="w-3.5 h-3.5" />
             </a>
             <a
-              href="https://www.tiktok.com/@your_account"
+              href="https://www.tiktok.com/@10.mizutaki?is_from_webapp=1&sender_device=pc"
               target="_blank"
               rel="noopener noreferrer"
               className="w-6 h-6 flex items-center justify-center bg-black text-white rounded-full shadow hover:opacity-90 transition-all"
@@ -807,7 +807,7 @@ export default function Home() {
 
           {/* メール */}
           <a
-            href="mailto:example@gmail.com"
+            href="mailto:ooyayusei@gmail.com"
             className="flex items-center gap-2 bg-lime-400 text-white px-4 py-2 rounded-full shadow hover:opacity-90 transition-all"
           >
             <svg

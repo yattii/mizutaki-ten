@@ -259,8 +259,8 @@ export default function Home() {
         variants={slideInUp}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.2 }}
+        viewport={{ once: true, amount: 0.05 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="max-w-screen-md mx-auto">
           {/* メニュー画像 */}

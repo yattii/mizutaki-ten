@@ -1,4 +1,10 @@
 "use client";
+declare global {
+  interface Window {
+    tiktokEmbedLoad?: () => void;
+  }
+}
+
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -35,7 +41,7 @@ export default function Home() {
   // TikTok埋め込みスクリプトを1回だけ読み込むで！
   useEffect(() => {
     const scriptId = "tiktok-embed-script";
-
+  
     if (!document.getElementById(scriptId)) {
       const script = document.createElement("script");
       script.id = scriptId;
@@ -43,12 +49,14 @@ export default function Home() {
       script.async = true;
       document.body.appendChild(script);
     } else {
-      // もしすでに読み込まれてたら、再実行するで
-      if ((window as any).tiktokEmbedLoad) {
-        (window as any).tiktokEmbedLoad();
+      // すでにあるなら再実行
+      if (window.tiktokEmbedLoad) {
+        window.tiktokEmbedLoad();
       }
     }
   }, []);
+  
+  
 
   // スライドアップのアニメーションや！ぬるっと出てくるで
   const slideInUp = {

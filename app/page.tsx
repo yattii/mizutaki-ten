@@ -2,19 +2,22 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaInstagram, FaTiktok } from 'react-icons/fa';
+
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   let scrollTimeout: NodeJS.Timeout;
 
+  // スクロール止まったら1秒後にポップアップ表示するで〜
   useEffect(() => {
     const handleScroll = () => {
       setShowPopup(false);
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         setShowPopup(true);
-      }, 1000); // 停止1秒後に表示
+      }, 1000); // 止まってから1秒やで
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -24,10 +27,30 @@ export default function Home() {
     };
   }, []);
 
+  // ページ全体スムーズにスクロールさせるんや
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
   }, []);
 
+  // TikTok埋め込みスクリプトを1回だけ読み込むで！
+  useEffect(() => {
+    const scriptId = "tiktok-embed-script";
+
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://www.tiktok.com/embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      // もしすでに読み込まれてたら、再実行するで
+      if ((window as any).tiktokEmbedLoad) {
+        (window as any).tiktokEmbedLoad();
+      }
+    }
+  }, []);
+
+  // スライドアップのアニメーションや！ぬるっと出てくるで
   const slideInUp = {
     hidden: { opacity: 0, y: 100 },
     visible: { opacity: 1, y: 0 },
@@ -54,7 +77,7 @@ export default function Home() {
 
         {/* PC用メニュー */}
         <div className="hidden md:flex gap-8 text-sm font-semibold text-gray-700">
-          <a href="#news">ニュース</a>
+          <a href="#sns">最新情報</a>
           <a href="#menu">メニュー</a>
           <a href="#kodawari">こだわり</a>
           <a href="#jouhou">店舗情報</a>
@@ -81,8 +104,8 @@ export default function Home() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()} // メニュー内部クリックでは閉じない
             >
-              <a href="#news" onClick={() => setMenuOpen(false)}>
-                ニュース
+              <a href="#sns" onClick={() => setMenuOpen(false)}>
+                最新情報
               </a>
               <a href="#menu" onClick={() => setMenuOpen(false)}>
                 メニュー
@@ -129,47 +152,97 @@ export default function Home() {
         />
       </motion.section>
 
-      {/* ニュースセクション（Instagram埋め込み） */}
-
       <motion.section
-        id="news"
-        className="scroll-mt-20 pt-24 pb-10 px-6"
-        variants={slideInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="max-w-screen-md mx-auto text-left">
-          <h2 className="text-3xl font-bold mb-6 border-b pb-2 border-black">
-            ニュース
-          </h2>
-          <div className="overflow-x-auto flex gap-4 scrollbar-hide snap-x snap-mandatory pb-4">
-            {[
-              "https://www.instagram.com/p/DBQjjlrSCHf/",
-              "https://www.instagram.com/p/C_kuDHqyKeu/",
-              "https://www.instagram.com/p/C-hYtQ1SgSh/",
-              "https://www.instagram.com/p/C-puTfsydoR/",
-            ].map((url, index) => {
-              const embedUrl = url.replace(/\/$/, "") + "/embed";
+  id="sns"
+  className="scroll-mt-20 pt-24 pb-10 px-6"
+  variants={slideInUp}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{ duration: 0.6 }}
+>
+  <div className="max-w-screen-md mx-auto text-left">
+    <h2 className="text-3xl font-bold mb-10 border-b pb-2 border-black">最新情報</h2>
 
-              return (
-                <iframe
-                  key={index}
-                  src={embedUrl}
-                  width="320"
-                  height="505"
-                  className="flex-shrink-0 snap-center rounded shadow border"
-                  frameBorder="0"
-                  scrolling="no"
-                  allow="encrypted-media"
-                  title={`Instagram post ${index + 1}`}
-                ></iframe>
-              );
-            })}
-          </div>
-        </div>
-      </motion.section>
+    {/* Instagramセクション */}
+    <div className="mb-16">
+      <h3 className="text-2xl font-semibold mb-4">Instagram</h3>
+      <div className="overflow-x-auto flex gap-4 scrollbar-hide snap-x snap-mandatory pb-4">
+        {[
+          "https://www.instagram.com/p/DBQjjlrSCHf/",
+          "https://www.instagram.com/p/C_kuDHqyKeu/",
+          "https://www.instagram.com/p/C-hYtQ1SgSh/",
+          "https://www.instagram.com/p/C-puTfsydoR/",
+        ].map((url, index) => {
+          const embedUrl = url.replace(/\/$/, "") + "/embed";
+          return (
+            <iframe
+              key={index}
+              src={embedUrl}
+              width="320"
+              height="505"
+              className="flex-shrink-0 snap-center rounded shadow border"
+              frameBorder="0"
+              scrolling="no"
+              allow="encrypted-media"
+              title={`Instagram post ${index + 1}`}
+            ></iframe>
+          );
+        })}
+      </div>
+
+      {/* Instagram誘導ボタン（右寄せ） */}
+      <div className="flex justify-end mt-4">
+        <a
+          href="https://www.instagram.com/ten.mizutaki?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-gray-500/50 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded shadow text-sm"
+        >
+          Instagramを見る
+        </a>
+      </div>
+    </div>
+
+    {/* TikTokセクション */}
+    <div>
+      <h3 className="text-2xl font-semibold mb-4">TikTok</h3>
+      <div className="overflow-x-auto flex gap-4 scrollbar-hide snap-x snap-mandatory pb-4">
+        {[
+          "7533142564396977415",
+          "7528277274702155026",
+          "7523608527051558151",
+          "7522835541470039304",
+        ].map((id, index) => (
+          <iframe
+            key={index}
+            src={`https://www.tiktok.com/embed/v2/${id}`}
+            width="320"
+            height="575"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            scrolling="no"
+            className="rounded shadow flex-shrink-0 snap-center"
+          />
+        ))}
+      </div>
+
+      {/* TikTok誘導ボタン（右寄せ） */}
+      <div className="flex justify-end mt-4">
+        <a
+          href="https://www.tiktok.com/@10.mizutaki"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-gray-500/50 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded shadow text-sm"
+        >
+          TikTokを見る
+        </a>
+      </div>
+    </div>
+  </div>
+</motion.section>
+
+
 
       {/* メニュー */}
       <motion.section
@@ -200,7 +273,7 @@ export default function Home() {
           </div>
 
           {/* ドリンクメニュー */}
-          <h2 className="text-3xl font-bold mb-6 border-b pb-2 border-gray-300">
+          <h2 className="text-3xl font-bold mb-6 border-b pb-2 border-black">
             ドリンクメニュー
           </h2>
           <div className="w-full border border-gray-300 text-sm bg-white/70">
@@ -343,6 +416,116 @@ export default function Home() {
               </div>
             ))}
           </div>
+          {/* 食べ飲み放題付きコース（1枚のメニュー表として表示） */}
+{/* 食べ飲み放題付きコース（画像風背景に変更） */}
+<h2 className="text-2xl font-bold mb-3 border-b pb-1 border-black mt-10">
+  食べ飲み放題付きコース
+</h2>
+{/* 飲み放題利用条件の注意書き */}
+<p className="text-sm text-gray-800 my-4">
+  ※ご予約様限定で飲み放題付きコースが利用できます。お早めにご予約ください。3名様以上でご利用いただけます。
+</p>
+
+
+<div className="overflow-x-auto bg-[#fdfaf3] border border-gray-300 rounded-md text-base">
+  <table className="w-full table-fixed border-collapse mb-2">
+    <thead>
+      <tr className="text-center text-lg">
+        <th className="w-1/2 py-2 border-b border-gray-300">5000円コース</th>
+        <th className="w-1/2 py-2 border-b border-gray-300">5500円コース</th>
+      </tr>
+    </thead>
+    <tbody className="align-top text-center">
+      {[
+        ["すもつ", "すもつ"],
+        ["サラダ", "サラダ"],
+        ["鶏のたたき", "鶏のたたき"],
+        ["ポテトフライ", "馬刺し"],
+        ["揚げ物", "ポテトフライ"],
+        ["焼き物", "揚げ物"],
+        ["とり雑炊", "焼き物"],
+        ["デザート", "とり雑炊"],
+        ["", "デザート"],
+      ].map(([left, right], index) => (
+        <tr key={index}>
+          <td className="py-1.5 px-3">{left}</td>
+          <td className="py-1.5 px-3">{right}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+{/* 飲み放題メニュー */}
+
+<div className="bg-[#fdfaf3] border border-gray-300 rounded-md p-4 mt-4 text-base leading-tight ">
+  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+    {/* 左列 */}
+    <div>
+      <p className="font-bold mb-2">〇生ビール</p>
+      <p className="font-bold mb-2">〇ノンアルコールビール</p>
+      <p className="font-bold mb-2">〇酎ハイ</p>
+      <ul className="list-disc list-inside mb-2 ml-4">
+        <li>プレーン</li>
+        <li>レモン</li>
+        <li>ピーチ</li>
+        <li>カルピス</li>
+        <li>ライム</li>
+      </ul>
+      <p className="font-bold mb-2">〇ウイスキー</p>
+      <ul className="list-disc list-inside mb-2 ml-4">
+        <li>デュワーズ</li>
+      </ul>
+      <p className="font-bold mb-2">〇果実酒</p>
+      <ul className="list-disc list-inside mb-2 ml-4">
+        <li>梅酒</li>
+        <li>赤しそ梅酒</li>
+        <li>はっさく梅酒</li>
+      </ul>
+    </div>
+
+    {/* 中央列 */}
+    <div>
+      <p className="font-bold mb-2">〇芋焼酎</p>
+      <ul className="list-disc list-inside mb-2 ml-4">
+        <li>黒霧島</li>
+      </ul>
+      <p className="font-bold mb-2">〇麦焼酎</p>
+      <ul className="list-disc list-inside mb-2 ml-4">
+        <li>二階堂</li>
+      </ul>
+      <p className="font-bold mb-2">〇黒糖焼酎</p>
+      <ul className="list-disc list-inside mb-2 ml-4">
+        <li>れんと</li>
+      </ul>
+      <p className="font-bold mb-2">〇カクテル</p>
+      <ul className="list-disc list-inside mb-2 ml-4">
+        <li>カシスオレンジ</li>
+        <li>カシスウーロン</li>
+        <li>カシスソーダ</li>
+        <li>ファジーネーブル</li>
+        <li>ピーチウーロン</li>
+        <li>ピーチソーダ</li>
+      </ul>
+    </div>
+
+    {/* 右列 */}
+    <div>
+      <p className="font-bold mb-3">〇翠じん</p>
+      <p className="font-bold mb-3">〇日本酒</p>
+      <p className="font-bold mb-2">〇ソフトドリンク</p>
+      <ul className="list-disc list-inside mb-2 ml-4">
+        <li>コーラ</li>
+        <li>烏龍茶</li>
+        <li>カルピス</li>
+        <li>ジンジャエール</li>
+        <li>オレンジジュース</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
         </div>
       </motion.section>
 
@@ -578,7 +761,7 @@ export default function Home() {
                 ＼ お気軽にお問い合わせください ／
               </p>
 
-              <div className="flex justify-center items-center gap-4 w-full">
+              <div className="flex justify-center items-center gap-1 w-full">
                 {/* 電話ボタン */}
                 <a
                   href="tel:07090944338"
@@ -619,6 +802,25 @@ export default function Home() {
                   </svg>
                   <span className="text-base">お問い合わせ</span>
                 </a>
+                {/* Instagramアイコンボタン */}
+<a
+  href="https://www.instagram.com/your_account" // ←あなたのアカウントに変更
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-6 h-6 flex items-center justify-center bg-pink-500 text-white rounded-full shadow hover:opacity-90 transition-all"
+>
+  <FaInstagram className="w-4 h-4" />
+</a>
+
+{/* TikTokアイコンボタン */}
+<a
+  href="https://www.tiktok.com/@your_account" // ←あなたのアカウントに変更
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-6 h-6 flex items-center justify-center bg-black text-white rounded-full shadow hover:opacity-90 transition-all"
+>
+  <FaTiktok className="w-4 h-4" />
+</a>
               </div>
             </div>
           </motion.div>
